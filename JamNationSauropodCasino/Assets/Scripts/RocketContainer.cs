@@ -12,10 +12,10 @@ public class RocketContainer : MonoBehaviour
     private void Start()
     {
         var rocketSpawnPointsList = new List<Transform>();
-        for (int i = -5; i < MainManager.Instance.NumRockets - 5; i++)  // TEMP, FIND OUT HOW TO GET WORLD POSITION FROM UI
+        for (int i = 0; i < MainManager.Instance.NumRockets; i++)
         {
             var rocketSpawnPoint = Instantiate(RocketSpawnPointPrefab, transform).transform;
-            rocketSpawnPoint.position = new Vector3(i, rocketSpawnPoint.position.y, rocketSpawnPoint.position.z);
+            rocketSpawnPoint.position = new Vector3(-6.925f + ((13.85f/ (MainManager.Instance.NumRockets-1)) * i), rocketSpawnPoint.position.y, rocketSpawnPoint.position.z);
 
             rocketSpawnPointsList.Add(rocketSpawnPoint);
         }
