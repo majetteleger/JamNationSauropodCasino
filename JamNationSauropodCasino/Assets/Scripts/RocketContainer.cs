@@ -53,6 +53,7 @@ public class RocketContainer : MonoBehaviour
     {
         var rocket = Instantiate(RocketPrefab, RocketSpawnPoints[spawnPointIndex]).GetComponent<Rocket>();
         rocket.RocketInfo = RocketInfoPanel.Instance.RocketInfos[spawnPointIndex];
+        rocket.GetComponent<TransformConstraint>().slaveRectTransform = rocket.RocketInfo.GetComponent<RectTransform>();
 
         return rocket;
     }

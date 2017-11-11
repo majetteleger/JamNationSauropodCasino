@@ -211,7 +211,6 @@ GameObject:
   - component: {fileID: 777298294}
   - component: {fileID: 777298293}
   - component: {fileID: 777298292}
-  - component: {fileID: 777298295}
   m_Layer: 5
   m_Name: RocketInfoPanel
   m_TagString: Untagged
@@ -283,28 +282,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 777298290}
---- !u!114 &777298295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 777298290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -405508275, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
 --- !u!1 &855030276
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +387,7 @@ MonoBehaviour:
     type: 2}
   RocketSpawnPointPrefab: {fileID: 1809142350035408, guid: 2eeac72f9c0864644829638b16bfd814,
     type: 2}
-  Width: 13.85
+  Width: 15
 --- !u!1 &1224408406
 GameObject:
   m_ObjectHideFlags: 0

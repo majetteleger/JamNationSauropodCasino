@@ -14,6 +14,7 @@ public class Rocket : MonoBehaviour
 
     private float _launchTimer;
     private bool _launched;
+    private bool _detonated;
     private bool _isSelected;
 
     private void Start()
@@ -24,7 +25,7 @@ public class Rocket : MonoBehaviour
 
     private void Update()
     {
-        if(!_launched)
+        if(!_launched && !_detonated)
         {
             _launchTimer -= Time.deltaTime;
 
@@ -85,6 +86,8 @@ public class Rocket : MonoBehaviour
 
     private void Detonate()
     {
+        _detonated = true;
+
         ResetAndHideInfo();
 
         MainManager.Instance.UnbindKey(this);
@@ -94,7 +97,7 @@ public class Rocket : MonoBehaviour
         Sound.postDetonation.Play();
 
         SpectacularityTracker.Instance.RegisterDetonation(this);
-
+        
         Destroy(gameObject, 1f);
     }
 }
