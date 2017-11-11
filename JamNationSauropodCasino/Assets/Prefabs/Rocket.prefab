@@ -216,7 +216,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1946762554796602}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.039791, y: -2.2761986, z: -2.9974494}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 224152892647512844}
@@ -340,8 +340,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 02d4efb06203f3742bb9083f228d203d, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -420,8 +420,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 3d867cd58fa892b4297b24155b1704a5, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -500,8 +500,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: b7a07befde6af2148ac9009384e322b7, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -580,8 +580,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 9b351c9b418dc3041b11c16a24347533, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -742,6 +742,7 @@ MonoBehaviour:
   KeyDisplay: {fileID: 114263296099083694}
   LaunchTime: 30
   SelectedLaunchTime: 5
+  Sound: {fileID: 114629274959294272}
 --- !u!114 &114581668220759798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -780,10 +781,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 064c7af63d33836469091ce6ff32db04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuse: {fileID: 0}
-  thruster: {fileID: 0}
-  detonation: {fileID: 0}
-  postDetonation: {fileID: 0}
+  fuse: {fileID: 82524467395803552}
+  thruster: {fileID: 82808325519696836}
+  detonation: {fileID: 82876622813978308}
+  postDetonation: {fileID: 82660041807609068}
 --- !u!114 &114864879865288588
 MonoBehaviour:
   m_ObjectHideFlags: 1

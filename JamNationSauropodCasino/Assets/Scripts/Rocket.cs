@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ public class Rocket : MonoBehaviour
 
     public float LaunchTime;
     public float SelectedLaunchTime;
+
+    public SoundController Sound;
 
     private float _launchTimer;
     private bool _launched;
@@ -52,6 +55,8 @@ public class Rocket : MonoBehaviour
         LaunchTime = SelectedLaunchTime;
         _launchTimer = LaunchTime;
 
+        Sound.fuse.Play();
+
         _isSelected = true;
     }
 
@@ -66,6 +71,9 @@ public class Rocket : MonoBehaviour
         MainManager.Instance.RocketContainer.RocketLaunched();
         _launched = true;
 
+        Sound.fuse.Stop();
+        Sound.thruster.Play();
+
         // TEMP
         transform.position += new Vector3(0, 5, 0);
         //
@@ -74,6 +82,11 @@ public class Rocket : MonoBehaviour
     private void Detonate()
     {
         MainManager.Instance.UnbindKey(this);
-        Destroy(gameObject);
+
+        Sound.thruster.Stop();
+        Sound.detonation.Play();
+        Sound.postDetonation.Play();
+
+        //Destroy(gameObject);
     }
 }

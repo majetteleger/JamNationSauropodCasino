@@ -6,16 +6,11 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    class SoundController : MonoBehaviour
+    public class SoundController : MonoBehaviour
     {
         public AudioSource fuse;
         public AudioSource thruster;
         public AudioSource detonation;
         public AudioSource postDetonation;
-
-        public void TriggerSound()
-        {
-
-        }
     }
 }
