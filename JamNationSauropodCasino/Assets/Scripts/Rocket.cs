@@ -9,9 +9,11 @@ public class Rocket : MonoBehaviour
     public Text KeyDisplay;
 
     public float LaunchTime;
+    public float SelectedLaunchTime;
 
     private float _launchTimer;
     private bool _launched;
+    private bool _isSelected;
 
     private void Start()
     {
@@ -27,14 +29,35 @@ public class Rocket : MonoBehaviour
 
             if (_launchTimer <= 0)
             {
-                Launch();
+                if(_isSelected)
+                {
+                    Launch();
+                }
+                else
+                {
+                    Detonate();
+                }
             }
         }
     }
 
-    public void DisplayKey(char key)
+    public void DisplayKey(string key)
     {
-        KeyDisplay.text = key.ToString();
+        KeyDisplay.text = key;
+    }
+
+    public void Select()
+    {
+        LaunchSlider.color = Color.red;
+        LaunchTime = SelectedLaunchTime;
+        _launchTimer = LaunchTime;
+
+        _isSelected = true;
+    }
+
+    public void Unselect()
+    {
+        Detonate();
     }
 
     private void Launch()
@@ -45,7 +68,6 @@ public class Rocket : MonoBehaviour
 
         // TEMP
         transform.position += new Vector3(0, 5, 0);
-        Invoke("Detonate", 2f); 
         //
     }
 

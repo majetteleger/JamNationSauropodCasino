@@ -272,7 +272,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LaunchSlider: {fileID: 114911177325395150}
   KeyDisplay: {fileID: 114263296099083694}
-  LaunchTime: 11
+  LaunchTime: 30
+  SelectedLaunchTime: 5
 --- !u!114 &114581668220759798
 MonoBehaviour:
   m_ObjectHideFlags: 1

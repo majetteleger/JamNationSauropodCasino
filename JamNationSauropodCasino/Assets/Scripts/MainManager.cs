@@ -6,10 +6,10 @@ public class MainManager : MonoBehaviour
 {
     public struct KeyRocketBinding
     {
-        public char Key;
+        public KeyCode Key;
         public Rocket Rocket;
 
-        public KeyRocketBinding(char key, Rocket rocket)
+        public KeyRocketBinding(KeyCode key, Rocket rocket)
         {
             Key = key;
             Rocket = rocket;
@@ -20,7 +20,7 @@ public class MainManager : MonoBehaviour
     
     public RocketContainer RocketContainer;
     public float RocketSpawnTime;
-    public char[] PossibleKeyBinds;
+    public KeyCode[] PossibleKeyBinds;
 
     public KeyRocketBinding[] KeyRocketBindings { get; set; }
 
@@ -56,10 +56,33 @@ public class MainManager : MonoBehaviour
             if(rocket != null)
             {
                 var key = BindRocketToRandomKey(rocket);
-                rocket.DisplayKey(key);
+                var displayedKey = key.ToString();
+
+                rocket.DisplayKey(displayedKey.Length > 1 ? displayedKey[displayedKey.Length - 1].ToString() : displayedKey);
             }
             
             _RocketSpawnTime = RocketSpawnTime;
+        }
+        
+        for(int i = 0; i < KeyRocketBindings.Length; i++)
+        {
+            if(KeyRocketBindings[i].Rocket == null)
+            {
+                continue;
+            }
+
+            var key = KeyRocketBindings[i].Key;
+            var rocket = KeyRocketBindings[i].Rocket;
+            
+            if (Input.GetKeyDown(key))
+            {
+                rocket.Select();
+            }
+
+            if(Input.GetKeyUp(key))
+            {
+                rocket.Unselect();
+            }
         }
     }
     
@@ -75,7 +98,7 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    private char BindRocketToRandomKey(Rocket rocket)
+    private KeyCode BindRocketToRandomKey(Rocket rocket)
     {
         var availableIndicesList = new List<int>();
         for (int i = 0; i < KeyRocketBindings.Length; i++)
