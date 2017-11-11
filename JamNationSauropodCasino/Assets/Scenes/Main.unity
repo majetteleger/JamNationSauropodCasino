@@ -410,6 +410,7 @@ MonoBehaviour:
     type: 2}
   RocketSpawnPointPrefab: {fileID: 1809142350035408, guid: 2eeac72f9c0864644829638b16bfd814,
     type: 2}
+  Width: 13.85
 --- !u!1 &1224408406
 GameObject:
   m_ObjectHideFlags: 0

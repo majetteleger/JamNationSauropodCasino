@@ -6,6 +6,7 @@ public class RocketContainer : MonoBehaviour
 {
     public GameObject RocketPrefab;
     public GameObject RocketSpawnPointPrefab;
+    public float Width;
 
     public Transform[] RocketSpawnPoints { get; set; }
     
@@ -15,7 +16,7 @@ public class RocketContainer : MonoBehaviour
         for (int i = 0; i < MainManager.Instance.NumRockets; i++)
         {
             var rocketSpawnPoint = Instantiate(RocketSpawnPointPrefab, transform).transform;
-            rocketSpawnPoint.position = new Vector3(-6.925f + ((13.85f/ (MainManager.Instance.NumRockets-1)) * i), rocketSpawnPoint.position.y, rocketSpawnPoint.position.z);
+            rocketSpawnPoint.position = new Vector3((-Width/2) + ((Width / (MainManager.Instance.NumRockets-1)) * i), rocketSpawnPoint.position.y, rocketSpawnPoint.position.z);
 
             rocketSpawnPointsList.Add(rocketSpawnPoint);
         }
