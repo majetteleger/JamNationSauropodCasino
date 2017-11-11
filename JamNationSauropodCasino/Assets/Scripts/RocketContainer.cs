@@ -6,16 +6,17 @@ public class RocketContainer : MonoBehaviour
 {
     public GameObject RocketPrefab;
     public GameObject RocketSpawnPointPrefab;
+    public float Width;
 
     public Transform[] RocketSpawnPoints { get; set; }
     
     private void Start()
     {
         var rocketSpawnPointsList = new List<Transform>();
-        for (int i = -5; i < MainManager.Instance.NumRockets - 5; i++)  // TEMP, FIND OUT HOW TO GET WORLD POSITION FROM UI
+        for (int i = 0; i < MainManager.Instance.NumRockets; i++)
         {
             var rocketSpawnPoint = Instantiate(RocketSpawnPointPrefab, transform).transform;
-            rocketSpawnPoint.position = new Vector3(i, rocketSpawnPoint.position.y, rocketSpawnPoint.position.z);
+            rocketSpawnPoint.position = new Vector3((-Width/2) + ((Width / (MainManager.Instance.NumRockets-1)) * i), rocketSpawnPoint.position.y, rocketSpawnPoint.position.z);
 
             rocketSpawnPointsList.Add(rocketSpawnPoint);
         }
@@ -52,6 +53,7 @@ public class RocketContainer : MonoBehaviour
     {
         var rocket = Instantiate(RocketPrefab, RocketSpawnPoints[spawnPointIndex]).GetComponent<Rocket>();
         rocket.RocketInfo = RocketInfoPanel.Instance.RocketInfos[spawnPointIndex];
+        rocket.GetComponent<TransformConstraint>().slaveRectTransform = rocket.RocketInfo.GetComponent<RectTransform>();
 
         return rocket;
     }
