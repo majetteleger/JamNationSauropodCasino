@@ -4,83 +4,55 @@ using UnityEngine;
 
 public class RocketContainer : MonoBehaviour
 {
-    public enum ContentOrientation
-    {
-        LeftToRight,
-        RightToLeft
-    }
-
     public GameObject RocketPrefab;
-    public ContentOrientation Orientation;
-    public int Capacity;
-    public float UpdateDelay;
+    public GameObject RocketSpawnPointPrefab;
 
-    public bool CanSpawnRocket
+    public Transform[] RocketSpawnPoints { get; set; }
+    
+    private void Start()
     {
-        get
+        var rocketSpawnPointsList = new List<Transform>();
+        for (int i = -5; i < MainManager.Instance.NumRockets - 5; i++)  // TEMP, FIND OUT HOW TO GET WORLD POSITION FROM UI
         {
-            return !_isWaitingForUpdate && transform.childCount <= Capacity;
+            var rocketSpawnPoint = Instantiate(RocketSpawnPointPrefab, transform).transform;
+            rocketSpawnPoint.position = new Vector3(i, rocketSpawnPoint.position.y, rocketSpawnPoint.position.z);
+
+            rocketSpawnPointsList.Add(rocketSpawnPoint);
         }
+
+        RocketSpawnPoints = rocketSpawnPointsList.ToArray();
     }
 
-    private bool _isWaitingForUpdate;
-
-    public Rocket SpawnRocket()
+    public Rocket TrySpawnRocket()
     {
-        var rocket = Instantiate(RocketPrefab, transform).GetComponent<Rocket>();
-        TryUpdateContent();
-        
+        var availableIndicesList = new List<int>();
+
+        for(int i = 0; i < RocketSpawnPoints.Length; i++)
+        {
+            var childRocket = RocketSpawnPoints[i].GetComponentInChildren<Rocket>();
+
+            if (childRocket == null)
+            {
+                availableIndicesList.Add(i);
+            }
+        }
+
+        var availableIndices = availableIndicesList.ToArray();
+
+        if(availableIndices.Length > 0)
+        {
+            var randomIndex = availableIndices[Random.Range(0, availableIndices.Length)];
+            return SpawnRocket(randomIndex);
+        }
+
+        return null;
+    }
+
+    private Rocket SpawnRocket(int spawnPointIndex)
+    {
+        var rocket = Instantiate(RocketPrefab, RocketSpawnPoints[spawnPointIndex]).GetComponent<Rocket>();
+        rocket.RocketInfo = RocketInfoPanel.Instance.RocketInfos[spawnPointIndex];
+
         return rocket;
-    }
-
-    public void RocketLaunched()
-    {
-        TryUpdateContent(UpdateDelay);
-    }
-
-    private void TryUpdateContent(float delay = 0)
-    {
-        if (!_isWaitingForUpdate)
-        {
-            Invoke("UpdateContent", delay);
-            _isWaitingForUpdate = true;
-        }
-    }
-
-    private void UpdateContent()
-    {
-        var content = new List<Transform>();
-        for (int i = 1; i < transform.childCount; i++)
-        {
-            content.Add(transform.GetChild(i));
-        }
-
-        if(content.Count == 0)
-        {
-            return;
-        }
-        
-        var containerSize = transform.GetChild(0).GetComponent<MeshRenderer>().bounds.extents.x * 2;
-        var contentSize = content[0].GetComponent<MeshRenderer>().bounds.extents.x * 2;
-
-        var spacing = (containerSize - (Capacity * contentSize)) / (Capacity - 1);
-
-        for (var i = 0; i < content.Count; i++)
-        {
-            var xPosition = 0f;
-
-            if (Orientation == ContentOrientation.LeftToRight)
-            {
-                xPosition = (spacing * i + contentSize * i + contentSize / 2) - containerSize / 2;
-            }
-            else
-            {
-                xPosition = -(spacing * i + contentSize * i + contentSize / 2) + containerSize / 2;
-            }
-
-            content[i].position = new Vector3(xPosition, content[i].position.y, content[i].position.z);
-        }
-
-        _isWaitingForUpdate = false;
     }
 }

@@ -19,6 +19,7 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance;
     
     public RocketContainer RocketContainer;
+    public int NumRockets;
     public float RocketSpawnTime;
     public KeyCode[] PossibleKeyBinds;
 
@@ -85,28 +86,18 @@ public class MainManager : MonoBehaviour
 
     private void TrySpawnRocket()
     {
-        if (!RocketContainer.CanSpawnRocket)
-        {
-            if(_RocketSpawnTimer != RocketSpawnTime)
-            {
-                _RocketSpawnTimer = RocketSpawnTime;
-            }
-
-            return;
-        }
-
         _RocketSpawnTimer -= Time.deltaTime;
 
         if (_RocketSpawnTimer <= 0)
         {
-            var rocket = RocketContainer.SpawnRocket();
+            var rocket = RocketContainer.TrySpawnRocket();
 
             if (rocket != null)
             {
                 var key = BindRocketToRandomKey(rocket);
                 var displayedKey = key.ToString();
 
-                rocket.DisplayKey(displayedKey.Length > 1 ? displayedKey[displayedKey.Length - 1].ToString() : displayedKey);
+                rocket.RocketInfo.DisplayKey(displayedKey.Length > 1 ? displayedKey[displayedKey.Length - 1].ToString() : displayedKey);
             }
 
             _RocketSpawnTimer = RocketSpawnTime;

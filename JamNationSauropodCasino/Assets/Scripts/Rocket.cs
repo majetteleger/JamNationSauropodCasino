@@ -5,11 +5,10 @@ using UnityEngine.UI;
 
 public class Rocket : MonoBehaviour
 {
-    public Image LaunchSlider;
-    public Text KeyDisplay;
-
     public float LaunchTime;
     public float SelectedLaunchTime;
+
+    public RocketInfo RocketInfo { get; set; }
 
     private float _launchTimer;
     private bool _launched;
@@ -18,6 +17,7 @@ public class Rocket : MonoBehaviour
     private void Start()
     {
         _launchTimer = LaunchTime;
+        ShowInfo();
     }
 
     private void Update()
@@ -25,7 +25,8 @@ public class Rocket : MonoBehaviour
         if(!_launched)
         {
             _launchTimer -= Time.deltaTime;
-            LaunchSlider.fillAmount = _launchTimer / LaunchTime;
+
+            RocketInfo.UpdateLaunchSlider(_launchTimer, LaunchTime);
 
             if (_launchTimer <= 0)
             {
@@ -40,15 +41,21 @@ public class Rocket : MonoBehaviour
             }
         }
     }
-
-    public void DisplayKey(string key)
+    
+    public void ShowInfo()
     {
-        KeyDisplay.text = key;
+        RocketInfo.GetComponent<CanvasGroup>().alpha = 1;
+    }
+
+    public void ResetAndHideInfo()
+    {
+        RocketInfo.LaunchSlider.color = Color.white;
+        RocketInfo.GetComponent<CanvasGroup>().alpha = 0;
     }
 
     public void Select()
     {
-        LaunchSlider.color = Color.red;
+        RocketInfo.LaunchSlider.color = Color.red;
         LaunchTime = SelectedLaunchTime;
         _launchTimer = LaunchTime;
 
@@ -62,8 +69,6 @@ public class Rocket : MonoBehaviour
 
     private void Launch()
     {
-        transform.SetParent(MainManager.Instance.RocketContainer.transform.parent);
-        MainManager.Instance.RocketContainer.RocketLaunched();
         _launched = true;
 
         // TEMP
@@ -73,6 +78,8 @@ public class Rocket : MonoBehaviour
 
     private void Detonate()
     {
+        ResetAndHideInfo();
+
         MainManager.Instance.UnbindKey(this);
         Destroy(gameObject);
     }
