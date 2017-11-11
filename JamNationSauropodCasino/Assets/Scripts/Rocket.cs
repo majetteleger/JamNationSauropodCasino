@@ -1,8 +1,5 @@
 ﻿using Assets.Scripts;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Rocket : MonoBehaviour
 {
@@ -15,6 +12,7 @@ public class Rocket : MonoBehaviour
 
     private float _launchTimer;
     private bool _launched;
+    private bool _detonated;
     private bool _isSelected;
 
     private void Start()
@@ -25,7 +23,7 @@ public class Rocket : MonoBehaviour
 
     private void Update()
     {
-        if(!_launched)
+        if(!_launched && !_detonated)
         {
             _launchTimer -= Time.deltaTime;
 
@@ -84,6 +82,8 @@ public class Rocket : MonoBehaviour
 
     private void Detonate()
     {
+        _detonated = true;
+
         ResetAndHideInfo();
 
         MainManager.Instance.UnbindKey(this);

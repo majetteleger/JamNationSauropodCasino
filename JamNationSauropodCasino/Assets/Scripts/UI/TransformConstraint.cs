@@ -82,11 +82,10 @@ public class TransformConstraint : MonoBehaviour
         Constrain();
 	}
 	
-    void Update()
+    /*void Update()
     {
         Constrain();
-	}
-
-
+	}*/
+    
     public UnityEvent m_OnAfterConstrain = new UnityEvent();
 }
