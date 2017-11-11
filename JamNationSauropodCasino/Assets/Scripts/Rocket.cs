@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,8 +8,9 @@ public class Rocket : MonoBehaviour
 {
     public float LaunchTime;
     public float SelectedLaunchTime;
-
+    
     public RocketInfo RocketInfo { get; set; }
+    public SoundController Sound;
 
     private float _launchTimer;
     private bool _launched;
@@ -36,7 +38,8 @@ public class Rocket : MonoBehaviour
                 }
                 else
                 {
-                    Detonate();
+                    //Detonate();
+                    Destroy(gameObject);
                 }
             }
         }
@@ -59,6 +62,8 @@ public class Rocket : MonoBehaviour
         LaunchTime = SelectedLaunchTime;
         _launchTimer = LaunchTime;
 
+        Sound.fuse.Play();
+
         _isSelected = true;
     }
 
@@ -71,6 +76,9 @@ public class Rocket : MonoBehaviour
     {
         _launched = true;
 
+        Sound.fuse.Stop();
+        Sound.thruster.Play();
+
         // TEMP
         transform.position += new Vector3(0, 5, 0);
         //
@@ -81,6 +89,13 @@ public class Rocket : MonoBehaviour
         ResetAndHideInfo();
 
         MainManager.Instance.UnbindKey(this);
-        Destroy(gameObject);
+
+        Sound.thruster.Stop();
+        Sound.detonation.Play();
+        Sound.postDetonation.Play();
+
+        SpectacularityTracker.Instance.RegisterDetonation(this);
+
+        //Destroy(gameObject);
     }
 }
