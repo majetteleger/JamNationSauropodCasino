@@ -38,7 +38,8 @@ public class Rocket : MonoBehaviour
                 }
                 else
                 {
-                    Detonate();
+                    //Detonate();
+                    Destroy(gameObject);
                 }
             }
         }
