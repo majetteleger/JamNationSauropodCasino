@@ -13,26 +13,41 @@ public class RocketContainer : MonoBehaviour
     public GameObject RocketPrefab;
     public ContentOrientation Orientation;
     public int Capacity;
-    
-    public Rocket TrySpawnRocket()
-    {
-        if(transform.childCount <= Capacity)
-        {
-            var rocket = Instantiate(RocketPrefab, transform).GetComponent<Rocket>();
-            ArrangeContent();
+    public float UpdateDelay;
 
-            return rocket;
+    public bool CanSpawnRocket
+    {
+        get
+        {
+            return !_isWaitingForUpdate && transform.childCount <= Capacity;
         }
+    }
+
+    private bool _isWaitingForUpdate;
+
+    public Rocket SpawnRocket()
+    {
+        var rocket = Instantiate(RocketPrefab, transform).GetComponent<Rocket>();
+        TryUpdateContent();
         
-        return null;
+        return rocket;
     }
 
     public void RocketLaunched()
     {
-        ArrangeContent();
+        TryUpdateContent(UpdateDelay);
     }
 
-    private void ArrangeContent()
+    private void TryUpdateContent(float delay = 0)
+    {
+        if (!_isWaitingForUpdate)
+        {
+            Invoke("UpdateContent", delay);
+            _isWaitingForUpdate = true;
+        }
+    }
+
+    private void UpdateContent()
     {
         var content = new List<Transform>();
         for (int i = 1; i < transform.childCount; i++)
@@ -54,7 +69,7 @@ public class RocketContainer : MonoBehaviour
         {
             var xPosition = 0f;
 
-            if(Orientation == ContentOrientation.LeftToRight)
+            if (Orientation == ContentOrientation.LeftToRight)
             {
                 xPosition = (spacing * i + contentSize * i + contentSize / 2) - containerSize / 2;
             }
@@ -65,5 +80,7 @@ public class RocketContainer : MonoBehaviour
 
             content[i].position = new Vector3(xPosition, content[i].position.y, content[i].position.z);
         }
+
+        _isWaitingForUpdate = false;
     }
 }

@@ -24,7 +24,7 @@ public class MainManager : MonoBehaviour
 
     public KeyRocketBinding[] KeyRocketBindings { get; set; }
 
-    private float _RocketSpawnTime;
+    private float _RocketSpawnTimer;
     
     private void Awake()
     {
@@ -33,7 +33,7 @@ public class MainManager : MonoBehaviour
 
     private void Start()
     {
-        _RocketSpawnTime = RocketSpawnTime;
+        _RocketSpawnTimer = RocketSpawnTime;
 
         var keyRocketBindingsList = new List<KeyRocketBinding>();
         for(int i = 0; i < PossibleKeyBinds.Length; i++)
@@ -47,22 +47,7 @@ public class MainManager : MonoBehaviour
 
     private void Update()
     {
-        _RocketSpawnTime -= Time.deltaTime;
-
-        if (_RocketSpawnTime <= 0)
-        {
-            var rocket = RocketContainer.TrySpawnRocket();
-
-            if(rocket != null)
-            {
-                var key = BindRocketToRandomKey(rocket);
-                var displayedKey = key.ToString();
-
-                rocket.DisplayKey(displayedKey.Length > 1 ? displayedKey[displayedKey.Length - 1].ToString() : displayedKey);
-            }
-            
-            _RocketSpawnTime = RocketSpawnTime;
-        }
+        TrySpawnRocket();
         
         for(int i = 0; i < KeyRocketBindings.Length; i++)
         {
@@ -95,6 +80,36 @@ public class MainManager : MonoBehaviour
                 KeyRocketBindings[i].Rocket = null;
                 return;
             }
+        }
+    }
+
+    private void TrySpawnRocket()
+    {
+        if (!RocketContainer.CanSpawnRocket)
+        {
+            if(_RocketSpawnTimer != RocketSpawnTime)
+            {
+                _RocketSpawnTimer = RocketSpawnTime;
+            }
+
+            return;
+        }
+
+        _RocketSpawnTimer -= Time.deltaTime;
+
+        if (_RocketSpawnTimer <= 0)
+        {
+            var rocket = RocketContainer.SpawnRocket();
+
+            if (rocket != null)
+            {
+                var key = BindRocketToRandomKey(rocket);
+                var displayedKey = key.ToString();
+
+                rocket.DisplayKey(displayedKey.Length > 1 ? displayedKey[displayedKey.Length - 1].ToString() : displayedKey);
+            }
+
+            _RocketSpawnTimer = RocketSpawnTime;
         }
     }
 
