@@ -38,8 +38,7 @@ public class Rocket : MonoBehaviour
                 }
                 else
                 {
-                    //Detonate();
-                    Destroy(gameObject);
+                    Detonate();
                 }
             }
         }
@@ -96,6 +95,6 @@ public class Rocket : MonoBehaviour
 
         SpectacularityTracker.Instance.RegisterDetonation(this);
 
-        //Destroy(gameObject);
+        Destroy(gameObject, 1f);
     }
 }

@@ -97,6 +97,16 @@ public class MainManager : MonoBehaviour
                 var key = BindRocketToRandomKey(rocket);
                 var displayedKey = key.ToString();
 
+                switch(displayedKey)
+                {
+                    case "Minus":
+                        displayedKey = "-";
+                        break;
+                    case "Equals":
+                        displayedKey = "=";
+                        break;
+                }
+
                 rocket.RocketInfo.DisplayKey(displayedKey.Length > 1 ? displayedKey[displayedKey.Length - 1].ToString() : displayedKey);
             }
 
