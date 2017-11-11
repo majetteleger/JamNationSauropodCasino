@@ -87,6 +87,8 @@ public class Rocket : MonoBehaviour
         Sound.detonation.Play();
         Sound.postDetonation.Play();
 
+        SpectacularityTracker.Instance.RegisterDetonation(this);
+
         //Destroy(gameObject);
     }
 }
