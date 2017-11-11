@@ -33,3 +33,5 @@ sysinfo.txt
 *.apk
 *.unitypackage
 JamNationSauropodCasino/Library/
+JamNationSauropodCasino/Temp/
+JamNationSauropodCasino/.vs/
