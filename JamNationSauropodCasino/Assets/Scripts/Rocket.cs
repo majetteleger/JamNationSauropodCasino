@@ -11,6 +11,7 @@ public class Rocket : MonoBehaviour
     
     public RocketInfo RocketInfo { get; set; }
     public SoundController Sound;
+    public TimeTransform TimeTransform;
 
     private float _launchTimer;
     private bool _launched;
@@ -38,7 +39,7 @@ public class Rocket : MonoBehaviour
                 }
                 else
                 {
-                    Detonate();
+                    DetonateFail();
                 }
             }
         }
@@ -78,9 +79,7 @@ public class Rocket : MonoBehaviour
         Sound.fuse.Stop();
         Sound.thruster.Play();
 
-        // TEMP
-        transform.position += new Vector3(0, 5, 0);
-        //
+        TimeTransform.enabled = true;
     }
 
     private void Detonate()
@@ -94,6 +93,16 @@ public class Rocket : MonoBehaviour
         Sound.postDetonation.Play();
 
         SpectacularityTracker.Instance.RegisterDetonation(this);
+
+        TimeTransform.TriggerEvent.Invoke();
+
+        Destroy(gameObject, 4f);//TODO: call from time transform
+    }
+    private void DetonateFail()
+    {
+        ResetAndHideInfo();
+
+        MainManager.Instance.UnbindKey(this);
 
         Destroy(gameObject, 1f);
     }
