@@ -455,7 +455,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 872002363}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 360.80002, y: 218, z: 0}
+  m_LocalPosition: {x: 401.5, y: 217.09375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1052630261}
@@ -591,7 +591,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1217353786}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -6, z: 5}
+  m_LocalPosition: {x: 0, y: -5, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -612,7 +612,7 @@ MonoBehaviour:
     type: 2}
   RocketSpawnPointPrefab: {fileID: 1809142350035408, guid: 2eeac72f9c0864644829638b16bfd814,
     type: 2}
-  Width: 15
+  Width: 20
 --- !u!1 &1224408406
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +758,7 @@ RectTransform:
   m_GameObject: {fileID: 1446176721}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 990}
-  m_LocalScale: {x: 2.4258416, y: 2.4258416, z: 2.4258416}
+  m_LocalScale: {x: 2.435114, y: 2.435114, z: 2.435114}
   m_Children:
   - {fileID: 1922959339}
   - {fileID: 549594722}
@@ -852,7 +852,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1469852676}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 381, y: 238, z: 0}
+  m_LocalPosition: {x: 421.5, y: 237, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 777298291}
@@ -1080,7 +1080,7 @@ RectTransform:
   m_GameObject: {fileID: 1994791387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 990}
-  m_LocalScale: {x: 2.4258416, y: 2.4258416, z: 2.4258416}
+  m_LocalScale: {x: 2.435114, y: 2.435114, z: 2.435114}
   m_Children:
   - {fileID: 744890195}
   m_Father: {fileID: 0}

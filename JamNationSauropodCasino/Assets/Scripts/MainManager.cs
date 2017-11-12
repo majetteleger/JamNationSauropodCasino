@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
 {
@@ -89,6 +90,11 @@ public class MainManager : MonoBehaviour
         }
     }
     
+    public void GameOver()
+    {
+        SceneManager.LoadScene("GameOver"); 
+    }
+
     public void UnbindKey(Rocket rocket)
     {
         for(int i = 0; i < KeyRocketBindings.Length; i++)

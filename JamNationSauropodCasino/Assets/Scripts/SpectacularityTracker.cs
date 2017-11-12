@@ -45,6 +45,7 @@ namespace Assets.Scripts
         }
 
         private List<Rocket> _toRemove = new List<Rocket>();
+
         private void Update()
         {
             if (Time.time - 1 > _lastLossTick)
@@ -66,6 +67,11 @@ namespace Assets.Scripts
                 _usedInCombo.Remove(rocket);
             }
             _toRemove.Clear();
+
+            if(CrowdExcitment <= 0)
+            {
+                MainManager.Instance.GameOver();
+            }
         }
 
         private void CheckCombos()
