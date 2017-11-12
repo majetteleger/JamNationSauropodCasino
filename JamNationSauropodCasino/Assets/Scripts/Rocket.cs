@@ -13,6 +13,9 @@ public class Rocket : MonoBehaviour
     public bool IsSelected { get; set; }
     public SoundController Sound;
     public Exploder Exploder;
+    public Color[] Color1;
+    public Color[] Color2;
+    public Sprite[] Icon;
 
     private float _launchTimer;
     private bool _launched;
@@ -28,32 +31,10 @@ public class Rocket : MonoBehaviour
         RocketType = Mathf.RoundToInt(Random.value * (Exploder.GetExplodablesCount() - 1));
 
         Exploder.Select(RocketType);
-
-        //TODO: Set UI Icon to corresponding RocketType
-
-        RocketColor = (MainManager.RocketColor)Random.Range(0, (int)MainManager.RocketColor.COUNT);
-        /*
-        switch (RocketColor)
-        {
-            case MainManager.RocketColor.Red:
-                RocketInfo.KeyBackground.color = Color.red;
-                break;
-            case MainManager.RocketColor.Green:
-                RocketInfo.KeyBackground.color = Color.green;
-                break;
-            case MainManager.RocketColor.Blue:
-                RocketInfo.KeyBackground.color = Color.blue;
-                break;
-            case MainManager.RocketColor.Yellow:
-                RocketInfo.KeyBackground.color = Color.yellow;
-                break;
-            case MainManager.RocketColor.Cyan:
-                RocketInfo.KeyBackground.color = Color.cyan;
-                break;
-            case MainManager.RocketColor.Magenta:
-                RocketInfo.KeyBackground.color = Color.magenta;
-                break;
-        }*/
+        
+        /*RocketInfo.RocketBackground.color = Color1[RocketType];
+        RocketInfo.RocketForegroung.color = Color2[RocketType];
+        RocketInfo.Icon.sprite = Icon[RocketType];*/
     }
 
     private void Update()
