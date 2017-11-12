@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class TitlePanel : MonoBehaviour
 {
-    public void UI_LoadGame()
+    private void Update()
     {
-        SceneManager.LoadScene("Main");
+        if (Input.GetButtonDown("StartButton_All"))
+        {
+            SceneManager.LoadScene("Main");
+        }
     }
 }
