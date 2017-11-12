@@ -135,6 +135,8 @@ public class Rocket : MonoBehaviour
     }
     private void DetonateFail()
     {
+        Sound.fuse.Stop();
+
         ResetAndHideInfo();
 
         MainManager.Instance.UnbindKey(this);
