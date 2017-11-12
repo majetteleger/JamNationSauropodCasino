@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33813892190499840}
   - component: {fileID: 23409349946364708}
   m_Layer: 0
-  m_Name: tt_ spade
+  m_Name: tt_spade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

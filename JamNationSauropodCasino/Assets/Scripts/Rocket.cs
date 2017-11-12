@@ -27,14 +27,14 @@ public class Rocket : MonoBehaviour
     {
         _launchTimer = LaunchTime;
         ShowInfo();
-        
+
         RocketType = Mathf.RoundToInt(Random.value * (Exploder.GetExplodablesCount() - 1));
 
         Exploder.Select(RocketType);
         
-        /*RocketInfo.RocketBackground.color = Color1[RocketType];
+        RocketInfo.RocketBackground.color = Color1[RocketType];
         RocketInfo.RocketForegroung.color = Color2[RocketType];
-        RocketInfo.Icon.sprite = Icon[RocketType];*/
+        RocketInfo.Icon.sprite = Icon[RocketType];
     }
 
     private void Update()
