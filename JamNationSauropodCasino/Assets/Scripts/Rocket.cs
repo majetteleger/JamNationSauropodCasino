@@ -24,7 +24,7 @@ public class Rocket : MonoBehaviour
         ShowInfo();
 
         RocketColor = (MainManager.RocketColor)Random.Range(0, (int)MainManager.RocketColor.COUNT);
-
+        /*
         switch (RocketColor)
         {
             case MainManager.RocketColor.Red:
@@ -45,7 +45,7 @@ public class Rocket : MonoBehaviour
             case MainManager.RocketColor.Magenta:
                 RocketInfo.KeyBackground.color = Color.magenta;
                 break;
-        }
+        }*/
     }
 
     private void Update()
