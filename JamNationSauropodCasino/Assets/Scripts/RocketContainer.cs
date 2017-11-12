@@ -16,7 +16,7 @@ public class RocketContainer : MonoBehaviour
         for (int i = 0; i < MainManager.Instance.NumRockets; i++)
         {
             var rocketSpawnPoint = Instantiate(RocketSpawnPointPrefab, transform).transform;
-            rocketSpawnPoint.position = new Vector3((-Width/2) + ((Width / (MainManager.Instance.NumRockets-1)) * i), rocketSpawnPoint.position.y, rocketSpawnPoint.position.z);
+            rocketSpawnPoint.localPosition = new Vector3((-Width / 2) + ((Width / (MainManager.Instance.NumRockets - 1)) * i), rocketSpawnPoint.localPosition.y, rocketSpawnPoint.localPosition.z);
 
             rocketSpawnPointsList.Add(rocketSpawnPoint);
         }
