@@ -8,6 +8,7 @@ public class Rocket : MonoBehaviour
     public float SelectedLaunchTime;
     
     public RocketInfo RocketInfo { get; set; }
+    public MainManager.RocketColor RocketColor { get; set; }
     public SoundController Sound;
     public Exploder Exploder;
 
@@ -20,6 +21,30 @@ public class Rocket : MonoBehaviour
     {
         _launchTimer = LaunchTime;
         ShowInfo();
+
+        RocketColor = (MainManager.RocketColor)Random.Range(0, (int)MainManager.RocketColor.COUNT);
+
+        switch (RocketColor)
+        {
+            case MainManager.RocketColor.Red:
+                RocketInfo.KeyBackground.color = Color.red;
+                break;
+            case MainManager.RocketColor.Green:
+                RocketInfo.KeyBackground.color = Color.green;
+                break;
+            case MainManager.RocketColor.Blue:
+                RocketInfo.KeyBackground.color = Color.blue;
+                break;
+            case MainManager.RocketColor.Yellow:
+                RocketInfo.KeyBackground.color = Color.yellow;
+                break;
+            case MainManager.RocketColor.Cyan:
+                RocketInfo.KeyBackground.color = Color.cyan;
+                break;
+            case MainManager.RocketColor.Magenta:
+                RocketInfo.KeyBackground.color = Color.magenta;
+                break;
+        }
     }
 
     private void Update()
