@@ -14,8 +14,15 @@ namespace Assets.Scripts
         private float _crowdExcitment = 0.2f;
         public float CrowdExcitment
         {
-            get { return _crowdExcitment; }
-            set { _crowdExcitment = Mathf.Clamp01(value); }
+            get
+            {
+                return _crowdExcitment;
+            }
+            set
+            {
+                _crowdExcitment = Mathf.Clamp01(value);
+                SpectacularityPanel.Instance.UpdateSpectacularityGauge(_crowdExcitment, 1f);
+            }
         }
 
         public float ExcitmentLossPerSec = 0.01f;
