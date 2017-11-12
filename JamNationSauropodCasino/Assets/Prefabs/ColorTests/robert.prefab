@@ -223,7 +223,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1429960820954200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 9.635171, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.25, z: 0.1}
   m_Children:
   - {fileID: 4638820237402282}
@@ -657,7 +657,7 @@ MonoBehaviour:
   referenceTrs: {fileID: 0}
   valueRange: {x: 0, y: 10}
   deltaTraverse: 0.25
-  traverse: 30.554325
+  traverse: 0
   initTraverse: 0
   traverseOffset: 1
   traverseScheme: 0
@@ -711,24 +711,47 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   traverseDrawSpan: 1.2
-  UsesTriggerTraverse: 1
-  TriggerTraverse: 0.15
-  TriggerEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 198941581313950622}
-        m_MethodName: Emit
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 60
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+  DebugEventTriggers:
+  - Traverse: 0.11
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 198941581313950622}
+          m_MethodName: Emit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 60
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  LaunchEventTriggers: []
+  DetonateEventTriggers:
+  - Traverse: 0
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 198941581313950622}
+          m_MethodName: Emit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 60
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+  CanDebug: 1
+  CanLaunch: 0
+  CanDetonate: 0
+  Repeats: 1
   outFloatList: []
   outStringList: []
   draw: 1
