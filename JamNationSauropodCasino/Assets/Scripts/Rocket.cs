@@ -87,12 +87,14 @@ public class Rocket : MonoBehaviour
     {
         RocketInfo.LaunchSlider.handleRect.GetComponent<Image>().color = Color.white;
         RocketInfo.GetComponent<CanvasGroup>().alpha = 0;
+        RocketInfo.IsShaking = false;
     }
 
     public void Select()
     {
         IsSelected = true;
 
+        RocketInfo.IsShaking = true;
         RocketInfo.LaunchSlider.handleRect.GetComponent<Image>().color = Color.magenta;
         LaunchTime = SelectedLaunchTime;
         _launchTimer = LaunchTime;
