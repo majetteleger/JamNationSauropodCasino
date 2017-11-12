@@ -70,7 +70,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Button R_All
+    m_Name: ButtonR_All
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 

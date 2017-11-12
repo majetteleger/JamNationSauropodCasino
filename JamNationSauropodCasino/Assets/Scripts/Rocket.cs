@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Rocket : MonoBehaviour
 {
@@ -9,13 +10,13 @@ public class Rocket : MonoBehaviour
     
     public RocketInfo RocketInfo { get; set; }
     public MainManager.RocketColor RocketColor { get; set; }
+    public bool IsSelected { get; set; }
     public SoundController Sound;
     public Exploder Exploder;
 
     private float _launchTimer;
     private bool _launched;
     private bool _detonated;
-    private bool _isSelected;
 
     private void Start()
     {
@@ -23,7 +24,7 @@ public class Rocket : MonoBehaviour
         ShowInfo();
 
         RocketColor = (MainManager.RocketColor)Random.Range(0, (int)MainManager.RocketColor.COUNT);
-
+        /*
         switch (RocketColor)
         {
             case MainManager.RocketColor.Red:
@@ -44,7 +45,7 @@ public class Rocket : MonoBehaviour
             case MainManager.RocketColor.Magenta:
                 RocketInfo.KeyBackground.color = Color.magenta;
                 break;
-        }
+        }*/
     }
 
     private void Update()
@@ -57,7 +58,7 @@ public class Rocket : MonoBehaviour
 
             if (_launchTimer <= 0)
             {
-                if(_isSelected)
+                if(IsSelected)
                 {
                     Launch();
                 }
@@ -76,20 +77,20 @@ public class Rocket : MonoBehaviour
 
     public void ResetAndHideInfo()
     {
-        RocketInfo.LaunchSlider.color = Color.white;
+        RocketInfo.LaunchSlider.handleRect.GetComponent<Image>().color = Color.white;
         RocketInfo.GetComponent<CanvasGroup>().alpha = 0;
     }
 
     public void Select()
     {
-        RocketInfo.LaunchSlider.color = Color.red;
+        IsSelected = true;
+
+        RocketInfo.LaunchSlider.handleRect.GetComponent<Image>().color = Color.magenta;
         LaunchTime = SelectedLaunchTime;
         _launchTimer = LaunchTime;
 
         Sound.fuse.Play();
-
-        _isSelected = true;
-
+        
         Exploder.Select(Mathf.RoundToInt(Random.value * 1f));//do it
     }
 
