@@ -16,6 +16,10 @@ public class RandomSpriteCycle : MonoBehaviour
     {
         _cycleTimer = CycleTime;
         _cycleIndex = Random.Range(0, Sprites.Length);
+
+        transform.localScale = Vector3.one * Random.Range(1.15f, 1.85f);
+        GetComponent<Image>().color = new Color(GetComponent<Image>().color.r, Random.Range(0.7f, 1.0f), GetComponent<Image>().color.b, GetComponent<Image>().color.a);
+
     }
 
     private void Update()
