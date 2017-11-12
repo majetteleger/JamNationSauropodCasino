@@ -8,6 +8,7 @@ public class RocketInfo : MonoBehaviour
 {
     public Image Icon;
     public Image Key;
+    public Image Fuse;
     public Slider LaunchSlider;
 
     public Sprite ASprite;
@@ -26,6 +27,7 @@ public class RocketInfo : MonoBehaviour
     public void UpdateLaunchSlider(float currentValue, float maxValue)
     {
         LaunchSlider.value = currentValue / maxValue;
+        Fuse.fillAmount = currentValue / maxValue;
     }
 
     public void DisplayKey(Assets.Scripts.Button key)
