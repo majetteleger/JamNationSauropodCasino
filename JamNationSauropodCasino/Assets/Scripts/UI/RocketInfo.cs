@@ -6,6 +6,8 @@ using Assets.Scripts;
 
 public class RocketInfo : MonoBehaviour
 {
+    public Image RocketBackground;
+    public Image RocketForegroung;
     public Image Icon;
     public Image Key;
     public Image Fuse;
