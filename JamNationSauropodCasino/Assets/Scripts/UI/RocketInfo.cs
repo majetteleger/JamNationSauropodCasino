@@ -8,11 +8,11 @@ public class RocketInfo : MonoBehaviour
     public Image Icon;
     public Image KeyBackground;
     public Text Key;
-    public Image LaunchSlider;
+    public Slider LaunchSlider;
     
     public void UpdateLaunchSlider(float currentValue, float maxValue)
     {
-        LaunchSlider.fillAmount = currentValue / maxValue;
+        LaunchSlider.value = currentValue / maxValue;
     }
 
     public void DisplayKey(string key)

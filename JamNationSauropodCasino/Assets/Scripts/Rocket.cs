@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Rocket : MonoBehaviour
 {
@@ -76,13 +77,13 @@ public class Rocket : MonoBehaviour
 
     public void ResetAndHideInfo()
     {
-        RocketInfo.LaunchSlider.color = Color.white;
+        RocketInfo.LaunchSlider.handleRect.GetComponent<Image>().color = Color.white;
         RocketInfo.GetComponent<CanvasGroup>().alpha = 0;
     }
 
     public void Select()
     {
-        RocketInfo.LaunchSlider.color = Color.red;
+        RocketInfo.LaunchSlider.handleRect.GetComponent<Image>().color = Color.magenta;
         LaunchTime = SelectedLaunchTime;
         _launchTimer = LaunchTime;
 
