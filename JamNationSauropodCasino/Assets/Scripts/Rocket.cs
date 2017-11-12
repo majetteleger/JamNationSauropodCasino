@@ -10,13 +10,13 @@ public class Rocket : MonoBehaviour
     
     public RocketInfo RocketInfo { get; set; }
     public MainManager.RocketColor RocketColor { get; set; }
+    public bool IsSelected { get; set; }
     public SoundController Sound;
     public Exploder Exploder;
 
     private float _launchTimer;
     private bool _launched;
     private bool _detonated;
-    private bool _isSelected;
 
     private void Start()
     {
@@ -58,7 +58,7 @@ public class Rocket : MonoBehaviour
 
             if (_launchTimer <= 0)
             {
-                if(_isSelected)
+                if(IsSelected)
                 {
                     Launch();
                 }
@@ -83,14 +83,14 @@ public class Rocket : MonoBehaviour
 
     public void Select()
     {
+        IsSelected = true;
+
         RocketInfo.LaunchSlider.handleRect.GetComponent<Image>().color = Color.magenta;
         LaunchTime = SelectedLaunchTime;
         _launchTimer = LaunchTime;
 
         Sound.fuse.Play();
-
-        _isSelected = true;
-
+        
         Exploder.Select(Mathf.RoundToInt(Random.value * 1f));//do it
     }
 
