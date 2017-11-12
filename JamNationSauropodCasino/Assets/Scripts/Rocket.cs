@@ -18,10 +18,18 @@ public class Rocket : MonoBehaviour
     private bool _launched;
     private bool _detonated;
 
+    public int RocketType = -1;
+
     private void Start()
     {
         _launchTimer = LaunchTime;
         ShowInfo();
+        
+        RocketType = Mathf.RoundToInt(Random.value * (Exploder.GetExplodablesCount() - 1));
+
+        Exploder.Select(RocketType);
+
+        //TODO: Set UI Icon to corresponding RocketType
 
         RocketColor = (MainManager.RocketColor)Random.Range(0, (int)MainManager.RocketColor.COUNT);
         /*
@@ -79,30 +87,20 @@ public class Rocket : MonoBehaviour
     {
         RocketInfo.LaunchSlider.handleRect.GetComponent<Image>().color = Color.white;
         RocketInfo.GetComponent<CanvasGroup>().alpha = 0;
+        RocketInfo.IsShaking = false;
     }
 
     public void Select()
     {
         IsSelected = true;
 
+        RocketInfo.IsShaking = true;
         RocketInfo.LaunchSlider.handleRect.GetComponent<Image>().color = Color.magenta;
         LaunchTime = SelectedLaunchTime;
         _launchTimer = LaunchTime;
 
         Sound.fuse.Play();
-
-        {//TODO: Move to Spawn()
-
-            //RocketType = 0;
-            RocketType = Mathf.RoundToInt(Random.value * (Exploder.GetExplodablesCount() - 1));
-
-            Exploder.Select(RocketType);
-
-            //TODO: Set UI Icon to corresponding RocketType
-        }
     }
-
-    public int RocketType = -1;
 
     public void Unselect()
     {
