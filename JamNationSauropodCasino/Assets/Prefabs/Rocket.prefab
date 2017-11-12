@@ -1858,9 +1858,27 @@ MonoBehaviour:
   SelectedLaunchTime: 1
   Sound: {fileID: 114629274959294272}
   Exploder: {fileID: 114012965478262414}
-  Color1: []
-  Color2: []
-  Icon: []
+  Color1:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  Color2:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  Icon:
+  - {fileID: 21300000, guid: 386eba1a8526c7143bd895a78d5747db, type: 3}
+  - {fileID: 21300000, guid: 3e53d7ea11a62d74993e6bf7f4c94abb, type: 3}
+  - {fileID: 21300000, guid: fc9a2c61c33566c41a72cc0da2d610c9, type: 3}
+  - {fileID: 21300000, guid: acc738e3ed0498b45a6f50636ded302d, type: 3}
+  - {fileID: 21300000, guid: acc738e3ed0498b45a6f50636ded302d, type: 3}
+  - {fileID: 21300000, guid: acc738e3ed0498b45a6f50636ded302d, type: 3}
   RocketType: -1
 --- !u!114 &114506241109723612
 MonoBehaviour:
