@@ -1,4 +1,5 @@
-﻿using Assets.Scripts;
+﻿using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
 
 public class Rocket : MonoBehaviour
@@ -9,7 +10,7 @@ public class Rocket : MonoBehaviour
     public RocketInfo RocketInfo { get; set; }
     public MainManager.RocketColor RocketColor { get; set; }
     public SoundController Sound;
-    public TimeTransform TimeTransform;
+    public Exploder Exploder;
 
     private float _launchTimer;
     private bool _launched;
@@ -88,6 +89,8 @@ public class Rocket : MonoBehaviour
         Sound.fuse.Play();
 
         _isSelected = true;
+
+        Exploder.Select(Mathf.RoundToInt(Random.value * 1f));//do it
     }
 
     public void Unselect()
@@ -102,7 +105,7 @@ public class Rocket : MonoBehaviour
         Sound.fuse.Stop();
         Sound.thruster.Play();
 
-        TimeTransform.enabled = true;
+        Exploder.Launch();
     }
 
     private void Detonate()
@@ -114,14 +117,12 @@ public class Rocket : MonoBehaviour
         MainManager.Instance.UnbindKey(this);
 
         Sound.thruster.Stop();
-        Sound.detonation.Play();
-        Sound.postDetonation.Play();
 
         SpectacularityTracker.Instance.RegisterDetonation(this);
 
-        TimeTransform.TriggerEvent.Invoke();
+        Exploder.Detonate();
 
-        Destroy(gameObject, 4f);//TODO: call from time transform
+        Destroy(gameObject, 8f);//TODO: call from time transform
     }
     private void DetonateFail()
     {

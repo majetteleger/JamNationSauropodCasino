@@ -1,4 +1,5 @@
 ﻿using System;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEditor;
 using System.Collections;
@@ -137,6 +138,26 @@ public class TrsTraverseResult {
 	}
 }
 
+
+[Serializable]
+public class EventTrigger
+{
+    public float Traverse = -1f;
+    public UnityEvent Event = new UnityEvent();
+    private float _lastFlooredMasterTraverse = -1f;
+
+    public void Process(float flooredMasterTraverse, float unitMasterTraverse, float traverseOffset)
+    {
+        float traverse = Traverse + traverseOffset;
+        float unitTraverse = Mathf.Repeat(traverse, 1f);
+        if (unitMasterTraverse > unitTraverse && flooredMasterTraverse > _lastFlooredMasterTraverse)
+        {
+            Event.Invoke();
+            _lastFlooredMasterTraverse = flooredMasterTraverse;
+        }
+    }
+}
+
 public class TimeTransform : MonoBehaviour {
 	
 	public enum operationEnum { TRANSLATE, ROTATE_RELATIVE, ROTATE };
@@ -171,10 +192,26 @@ public class TimeTransform : MonoBehaviour {
 
 	public float traverseDrawSpan = 1.2f;
 
-    private float _lastTriggerTraverseUnit = -1f;
-    public bool UsesTriggerTraverse = false;
-    public float TriggerTraverse = 0f;
-    public UnityEvent TriggerEvent = new UnityEvent();
+    public List<EventTrigger> LaunchEventTriggers = new List<EventTrigger>();
+    public List<EventTrigger> DetonateEventTriggers = new List<EventTrigger>();
+
+    private bool _canLaunch;
+    private float _launchOffset;
+    public void Launch()
+    {
+        _canLaunch = true;
+        enabled = true;
+        _launchOffset = traverse;
+    }
+
+    private bool _canDetonate;
+    private float _detonateOffset;
+    public void Detonate()
+    {
+        _canDetonate = true;
+        _detonateOffset = traverse;
+    }
+
 
 	private AnimationCurve RoundCurveKey(AnimationCurve curve){
 		int keysLength = curve.keys.Length;
@@ -193,12 +230,15 @@ public class TimeTransform : MonoBehaviour {
 		traversePongCurve = RoundCurveKey(traversePongCurve);
 	}
 
+    public bool Repeats;
 	private void Traverse(){
 
 		if(valueRange.x == valueRange.y){return;}
 
 		float timedDeltaTraverse = deltaTraverse *Time.deltaTime;
 		traverse += timedDeltaTraverse;
+
+        if (!Repeats) traverse = traverse > 1f ? 1f : traverse;
 	}
 
 	private float prevValue = 0f;
@@ -720,17 +760,31 @@ public class TimeTransform : MonoBehaviour {
 
 		Traverse();
 
-        if (UsesTriggerTraverse)
-	    {
-            float currentTraverseUnit = Mathf.Floor(traverse);
-            if (Mathf.Repeat(traverse, 1f) > Mathf.Repeat(TriggerTraverse, 1f) && currentTraverseUnit > _lastTriggerTraverseUnit)
-	        {
-                TriggerEvent.Invoke();
-                _lastTriggerTraverseUnit = currentTraverseUnit;
-            }
+        if (_canLaunch || _canDetonate)
+        {
+            float flooredTraverse = Mathf.Floor(traverse);
+            float unitTraverse = Mathf.Repeat(traverse, 1f);
+
+            //launch
+	        if (_canLaunch)
+            {
+                foreach (EventTrigger eventTrigger in LaunchEventTriggers)
+                {
+                    eventTrigger.Process(flooredTraverse, unitTraverse, _launchOffset);
+                }
+	        }
+
+            //detonate
+	        if (_canDetonate)
+            {
+                foreach (EventTrigger eventTrigger in DetonateEventTriggers)
+                {
+                    eventTrigger.Process(flooredTraverse, unitTraverse, _detonateOffset);
+                } 
+	        }
 	    }
 
-		//temp trs and traverse reset
+	    //temp trs and traverse reset
 		if(reset){
 			transform.localPosition = new Vector3();
 			transform.localRotation = new Quaternion();
