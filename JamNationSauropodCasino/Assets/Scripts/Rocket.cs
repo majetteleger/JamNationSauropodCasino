@@ -92,9 +92,19 @@ public class Rocket : MonoBehaviour
         _launchTimer = LaunchTime;
 
         Sound.fuse.Play();
-        
-        Exploder.Select(Mathf.RoundToInt(Random.value * 1f));//do it
+
+        {//TODO: Move to Spawn()
+
+            //RocketType = 0;
+            RocketType = Mathf.RoundToInt(Random.value * (Exploder.GetExplodablesCount() - 1));
+
+            Exploder.Select(RocketType);
+
+            //TODO: Set UI Icon to corresponding RocketType
+        }
     }
+
+    public int RocketType = -1;
 
     public void Unselect()
     {
@@ -106,7 +116,7 @@ public class Rocket : MonoBehaviour
         _launched = true;
 
         Sound.fuse.Stop();
-        Sound.thruster.Play();
+        //Sound.thruster.Play();
 
         Exploder.Launch();
     }
@@ -119,7 +129,7 @@ public class Rocket : MonoBehaviour
 
         MainManager.Instance.UnbindKey(this);
 
-        Sound.thruster.Stop();
+        //Sound.thruster.Stop();
 
         SpectacularityTracker.Instance.RegisterDetonation(this);
 

@@ -20,18 +20,18 @@ namespace Assets.Scripts
         }
         public void Thruster(AudioClip clip)
         {
-            fuse.clip = clip;
-            fuse.Play();
+            thruster.clip = clip;
+            thruster.Play();
         }
         public void Detonation(AudioClip clip)
         {
-            fuse.clip = clip;
-            fuse.Play();
+            detonation.clip = clip;
+            detonation.Play();
         }
         public void PostDetonation(AudioClip clip)
         {
-            fuse.clip = clip;
-            fuse.Play();
+            postDetonation.clip = clip;
+            postDetonation.Play();
         }
     }
 }

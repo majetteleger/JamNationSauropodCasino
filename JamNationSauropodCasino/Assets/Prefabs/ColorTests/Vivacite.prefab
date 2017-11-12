@@ -306,7 +306,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1683876905716154}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 3.478812, z: 0}
   m_LocalScale: {x: 0.1, y: 0.25, z: 0.1}
   m_Children:
   - {fileID: 4738485705706838}
@@ -599,7 +599,7 @@ MonoBehaviour:
   referenceTrs: {fileID: 0}
   valueRange: {x: 0, y: 10}
   deltaTraverse: 0.25
-  traverse: 319.26056
+  traverse: 2.9174411
   initTraverse: 0
   traverseOffset: 1
   traverseScheme: 0
@@ -653,24 +653,30 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   traverseDrawSpan: 1.2
-  UsesTriggerTraverse: 1
-  TriggerTraverse: 0.15
-  TriggerEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 198485219629265258}
-        m_MethodName: Emit
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 60
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  DebugEventTriggers:
+  - Traverse: 0.11
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 198485219629265258}
+          m_MethodName: Emit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 60
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  LaunchEventTriggers: []
+  DetonateEventTriggers: []
+  CanDebug: 1
+  CanLaunch: 0
+  CanDetonate: 0
+  Repeats: 1
   outFloatList: []
   outStringList: []
   draw: 1
@@ -846,7 +852,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 804166465
+  randomSeed: -866829446
   InitialModule:
     serializedVersion: 3
     enabled: 1

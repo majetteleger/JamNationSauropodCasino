@@ -14,6 +14,11 @@ public class Exploder : MonoBehaviour
     public List<Explodable> Explodables = new List<Explodable>();
     private Explodable _explodable;
 
+    public int GetExplodablesCount()
+    {
+        return Explodables.Count;
+    }
+
     public void Select(int index)
     {
         //if (index < 0 || index >= Explodables.Count) return; //let's not mute errors
