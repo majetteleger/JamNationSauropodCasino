@@ -261,55 +261,10 @@ public class MainManager : MonoBehaviour
             if (rocket != null)
             {
                 var key = BindRocketToRandomKey(rocket);
-                string displayedKey;
+                rocket.RocketInfo.DisplayKey(key);
 
-                switch (key)
-                {
-                    case Button.A:
-                        displayedKey = "A";
-                        break;
-                    case Button.B:
-                        displayedKey = "B";
-                        break;
-                    case Button.X:
-                        displayedKey = "X";
-                        break;
-                    case Button.Y:
-                        displayedKey = "Y";
-                        break;
-                    case Button.L1:
-                        displayedKey = "L1";
-                        break;
-                    case Button.R1:
-                        displayedKey = "R1";
-                        break;
-                    case Button.R2:
-                        displayedKey = "R2";
-                        break;
-                    case Button.L2:
-                        displayedKey = "L2";
-                        break;
-                    case Button.Up:
-                        displayedKey = "U";
-                        break;
-                    case Button.Down:
-                        displayedKey = "D";
-                        break;
-                    case Button.Left:
-                        displayedKey = "L";
-                        break;
-                    case Button.Right:
-                        displayedKey = "R";
-                        break;
-                    default:
-                        displayedKey = " ";
-                        break;
-                }
-
-                rocket.RocketInfo.DisplayKey(displayedKey);
+                _RocketSpawnTimer = RocketSpawnTime;
             }
-
-            _RocketSpawnTimer = RocketSpawnTime;
         }
     }
 
