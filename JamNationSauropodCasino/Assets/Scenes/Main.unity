@@ -3989,7 +3989,7 @@ MonoBehaviour:
   RocketContainer: {fileID: 1217353788}
   NumRockets: 10
   StartRockets: 5
-  RocketSpawnTime: 3
+  RocketSpawnTime: 1
   PossibleKeyBinds: 300000003100000032000000330000003400000035000000360000003700000038000000390000002d0000003d000000
 --- !u!4 &855030278
 Transform:

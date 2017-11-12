@@ -16,11 +16,17 @@ public class Folk : MonoBehaviour
 
     public void HandsUp()
     {
-        _spriteRenderer.sprite = HandsUpSprite;
+        if(HandsUpSprite != null && _spriteRenderer != null)
+        {
+            _spriteRenderer.sprite = HandsUpSprite;
+        }
     }
 
     public void HandsDown()
     {
-        _spriteRenderer.sprite = HandsDownSprite;
+        if(HandsDownSprite != null && _spriteRenderer != null)
+        {
+            _spriteRenderer.sprite = HandsDownSprite;
+        }
     }
 }
