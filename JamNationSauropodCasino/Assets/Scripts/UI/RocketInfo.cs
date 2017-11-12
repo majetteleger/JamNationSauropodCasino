@@ -10,6 +10,8 @@ public class RocketInfo : MonoBehaviour
     public Image Key;
     public Image Fuse;
     public Slider LaunchSlider;
+    
+    public float shakeRange = 20f;
 
     public Sprite ASprite;
     public Sprite BSprite;
@@ -23,6 +25,26 @@ public class RocketInfo : MonoBehaviour
     public Sprite DownSprite;
     public Sprite LeftSprite;
     public Sprite RightSprite;
+
+    private Vector3 originalRotation;
+
+    public bool IsShaking;
+
+    private void Start()
+    {
+        originalRotation = transform.eulerAngles;
+    }
+
+    private void Update()
+    {
+        if(IsShaking)
+        {
+            float z = Random.value * shakeRange - (shakeRange / 2);
+            Icon.transform.eulerAngles = new Vector3(originalRotation.x, originalRotation.y, originalRotation.z + z);
+            Fuse.transform.eulerAngles = new Vector3(originalRotation.x, originalRotation.y, originalRotation.z + z);
+            LaunchSlider.transform.eulerAngles = new Vector3(originalRotation.x, originalRotation.y, originalRotation.z + z);
+        }
+    }
 
     public void UpdateLaunchSlider(float currentValue, float maxValue)
     {

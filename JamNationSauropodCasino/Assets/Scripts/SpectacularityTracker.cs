@@ -12,6 +12,7 @@ namespace Assets.Scripts
         public AudioClip CrowdSound;
         public AudioClip ApplaudSound;
         public AudioClip CheerSound;
+        public WordsPanel Words;
 
         [SerializeField]
         private float _crowdExcitment = 0.2f;
@@ -166,6 +167,7 @@ namespace Assets.Scripts
             {
                 CrowdExcitment += 0.4f;
                 Audio.PlayOneShot(CheerSound);
+                Words.AnimateRainbowBoom();
                 Debug.Log("Grand Finale");
             }
 
@@ -184,30 +186,34 @@ namespace Assets.Scripts
             {
                 CrowdExcitment += 0.2f;
                 Audio.PlayOneShot(ApplaudSound);
+                Words.AnimateTimedBlast();
                 Debug.Log("Timed Blast");
                 foreach (Rocket r in found)
                     _usedInCombo.Add(r);
             }
 
-            //Color Blast Combo
-            /*bool colorMatch = true;
-            int colorCounter = 0;
-            MainManager.RocketColor tempColor = _recentDetonations.ElementAt(0).Key.RocketColor;
+            //Unity Combo
+            bool perfectMatch = true;
+            int lastType = -1;
             foreach (KeyValuePair<Rocket, float> entry in _recentDetonations)
             {
-                colorCounter++;
-
-                if (entry.Key.RocketColor != tempColor)
+                if (lastType == -1)
                 {
-                    colorMatch = false;
+                    lastType = entry.Key.RocketType;
+                }
+                else if (entry.Key.RocketType != lastType)
+                {
+                    perfectMatch = false;
                     break;
                 }
             }
-            if(colorMatch)
+            if(perfectMatch && _recentDetonations.Count >= 4)
             {
-                CrowdExcitment += 0.05f * colorCounter;
-                Debug.Log("Color Blast");
-            }*/
+                CrowdExcitment += 0.2f;
+                Audio.PlayOneShot(ApplaudSound);
+                Words.AnimateUnityBoom();
+                Debug.Log("Unity");
+            }
         }
 
         public void RegisterDetonation(Rocket rocket)
