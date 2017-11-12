@@ -12,6 +12,7 @@ namespace Assets.Scripts
         public AudioClip CrowdSound;
         public AudioClip ApplaudSound;
         public AudioClip CheerSound;
+        public WordsPanel Words;
 
         [SerializeField]
         private float _crowdExcitment = 0.2f;
