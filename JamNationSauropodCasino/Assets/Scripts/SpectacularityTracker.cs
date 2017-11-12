@@ -189,25 +189,28 @@ namespace Assets.Scripts
                     _usedInCombo.Add(r);
             }
 
-            //Color Blast Combo
-            /*bool colorMatch = true;
-            int colorCounter = 0;
+            //Unity Combo
+            bool perfectMatch = true;
+            int lastType = -1;
             MainManager.RocketColor tempColor = _recentDetonations.ElementAt(0).Key.RocketColor;
             foreach (KeyValuePair<Rocket, float> entry in _recentDetonations)
             {
-                colorCounter++;
-
-                if (entry.Key.RocketColor != tempColor)
+                if (lastType == -1)
                 {
-                    colorMatch = false;
+                    lastType = entry.Key.RocketType;
+                }
+                else if (entry.Key.RocketType != lastType)
+                {
+                    perfectMatch = false;
                     break;
                 }
             }
-            if(colorMatch)
+            if(perfectMatch && _recentDetonations.Count >= 4)
             {
-                CrowdExcitment += 0.05f * colorCounter;
-                Debug.Log("Color Blast");
-            }*/
+                CrowdExcitment += 0.2f;
+                Audio.PlayOneShot(ApplaudSound);
+                Debug.Log("Unity");
+            }
         }
 
         public void RegisterDetonation(Rocket rocket)
