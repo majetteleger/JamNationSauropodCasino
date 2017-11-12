@@ -9,7 +9,7 @@ public class TitlePanel : MonoBehaviour
     {
         if (Input.GetButtonDown("StartButton_All"))
         {
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("Tuto");
         }
     }
 }
