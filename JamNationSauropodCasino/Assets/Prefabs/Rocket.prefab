@@ -1540,7 +1540,25 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  LaunchEventTriggers: []
+  LaunchEventTriggers:
+  - Traverse: 0
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114629274959294272}
+          m_MethodName: Thruster
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 0e12a7090616c014eb3923d2d9b9af7c,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
   DetonateEventTriggers:
   - Traverse: 0
     Event:
@@ -1579,10 +1597,40 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 114629274959294272}
+          m_MethodName: Detonation
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 7675d2f019da4dd4d9ba3bf9b80d93b0,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - Traverse: 0.1
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114629274959294272}
+          m_MethodName: Detonation
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 56ccb5e2aee710442b3fd823c7bd5750,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
   CanDebug: 0
-  CanLaunch: 0
+  CanLaunch: 1
   CanDetonate: 0
   Repeats: 0
   outFloatList: []
@@ -1810,27 +1858,9 @@ MonoBehaviour:
   SelectedLaunchTime: 1
   Sound: {fileID: 114629274959294272}
   Exploder: {fileID: 114012965478262414}
-  Color1:
-  - {r: 0.76862746, g: 0.22745098, b: 0.2901961, a: 1}
-  - {r: 0.12156863, g: 0.8901961, b: 1, a: 1}
-  - {r: 0.4, g: 0.41568628, b: 0.4627451, a: 1}
-  - {r: 0.76862746, g: 0.22745098, b: 0.2901961, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.02745098, g: 0.85882354, b: 0.9490196, a: 1}
-  Color2:
-  - {r: 0.827451, g: 0.047058824, b: 0.30980393, a: 1}
-  - {r: 0.4862745, g: 0.3529412, b: 0.48235294, a: 1}
-  - {r: 0, g: 0.17254902, b: 0.30588236, a: 1}
-  - {r: 0.827451, g: 0.047058824, b: 0.30980393, a: 1}
-  - {r: 0.68235296, g: 0.02745098, b: 0.02745098, a: 1}
-  - {r: 0.65882355, g: 0.5176471, b: 0.54509807, a: 1}
-  Icon:
-  - {fileID: 21300000, guid: 386eba1a8526c7143bd895a78d5747db, type: 3}
-  - {fileID: 21300000, guid: 3e53d7ea11a62d74993e6bf7f4c94abb, type: 3}
-  - {fileID: 21300000, guid: fc9a2c61c33566c41a72cc0da2d610c9, type: 3}
-  - {fileID: 21300000, guid: acc738e3ed0498b45a6f50636ded302d, type: 3}
-  - {fileID: 21300000, guid: acc738e3ed0498b45a6f50636ded302d, type: 3}
-  - {fileID: 21300000, guid: acc738e3ed0498b45a6f50636ded302d, type: 3}
+  Color1: []
+  Color2: []
+  Icon: []
   RocketType: -1
 --- !u!114 &114506241109723612
 MonoBehaviour:
