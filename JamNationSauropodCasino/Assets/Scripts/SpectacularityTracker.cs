@@ -39,7 +39,13 @@ namespace Assets.Scripts
             Instance = this;
         }
 
+        private void Start()
+        {
+            SpectacularityPanel.Instance.UpdateSpectacularityGauge(CrowdExcitment, 1f);
+        }
+
         private List<Rocket> _toRemove = new List<Rocket>();
+
         private void Update()
         {
             if (Time.time - 1 > _lastLossTick)
@@ -61,6 +67,11 @@ namespace Assets.Scripts
                 _usedInCombo.Remove(rocket);
             }
             _toRemove.Clear();
+
+            if(CrowdExcitment <= 0)
+            {
+                MainManager.Instance.GameOver();
+            }
         }
 
         private void CheckCombos()
@@ -69,6 +80,7 @@ namespace Assets.Scripts
             if (_recentDetonations.Count >= 12)
             {
                 CrowdExcitment += 0.4f;
+                Debug.Log("Grand Finale");
             }
 
             //Timed Blast Combo
@@ -84,7 +96,28 @@ namespace Assets.Scripts
             if (timedBlastCounter >= 3)
             {
                 CrowdExcitment += 0.2f;
+                Debug.Log("Timed Blast");
             }
+
+            //Color Blast Combo
+            /*bool colorMatch = true;
+            int colorCounter = 0;
+            MainManager.RocketColor tempColor = _recentDetonations.ElementAt(0).Key.RocketColor;
+            foreach (KeyValuePair<Rocket, float> entry in _recentDetonations)
+            {
+                colorCounter++;
+
+                if (entry.Key.RocketColor != tempColor)
+                {
+                    colorMatch = false;
+                    break;
+                }
+            }
+            if(colorMatch)
+            {
+                CrowdExcitment += 0.05f * colorCounter;
+                Debug.Log("Color Blast");
+            }*/
         }
 
         public void RegisterDetonation(Rocket rocket)

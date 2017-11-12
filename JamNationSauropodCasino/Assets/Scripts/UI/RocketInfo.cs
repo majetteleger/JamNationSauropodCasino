@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class RocketInfo : MonoBehaviour
 {
     public Image Icon;
+    public Image KeyBackground;
     public Text Key;
     public Image LaunchSlider;
     
