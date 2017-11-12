@@ -15,7 +15,9 @@ namespace Assets.Scripts.UI
             if (ButtonManager.GetButtonUp(Button.A, Player.Any))
                 Debug.Log("A up");
             if (ButtonManager.GetButtonDown(Button.B, Player.P1))
-                Debug.Log("B");
+                Debug.Log("B P1");
+            if (ButtonManager.GetButtonDown(Button.B, Player.P2))
+                Debug.Log("B P2");
             if (ButtonManager.GetButtonDown(Button.R2, Player.Any))
                 Debug.Log("R2 down");
             //if (ButtonManager.GetButtonUp(Button.R2, Player.Any))
