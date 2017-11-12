@@ -8,6 +8,8 @@ namespace Assets.Scripts
     public class SpectacularityTracker : MonoBehaviour
     {
         public static SpectacularityTracker Instance;
+        private AudioSource Audio;
+        public AudioClip CrowdSound;
 
         [SerializeField]
         private float _crowdExcitment = 0.2f;
@@ -46,6 +48,7 @@ namespace Assets.Scripts
         private void Awake()
         {
             Instance = this;
+            Audio = GetComponent<AudioSource>();
         }
 
         private void Start()
@@ -148,23 +151,28 @@ namespace Assets.Scripts
             if (_recentDetonations.Count >= 12)
             {
                 CrowdExcitment += 0.4f;
+                Audio.PlayOneShot(CrowdSound);
                 Debug.Log("Grand Finale");
             }
 
             //Timed Blast Combo
             int timedBlastCounter = 0;
+            List<Rocket> found = new List<Rocket>();
             foreach (KeyValuePair<Rocket, float> entry in _recentDetonations)
             {
-                if (entry.Value <= Time.time + 0.1f && !_usedInCombo.Contains(entry.Key))
+                if (entry.Value >= Time.time - 0.1f && !_usedInCombo.Contains(entry.Key))
                 {
                     timedBlastCounter++;
-                    _usedInCombo.Add(entry.Key);
+                    found.Add(entry.Key);
                 }
             }
             if (timedBlastCounter >= 3)
             {
                 CrowdExcitment += 0.2f;
+                Audio.PlayOneShot(CrowdSound);
                 Debug.Log("Timed Blast");
+                foreach (Rocket r in found)
+                    _usedInCombo.Add(r);
             }
 
             //Color Blast Combo
