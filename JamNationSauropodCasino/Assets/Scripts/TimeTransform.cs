@@ -192,23 +192,26 @@ public class TimeTransform : MonoBehaviour {
 
 	public float traverseDrawSpan = 1.2f;
 
+    public List<EventTrigger> DebugEventTriggers = new List<EventTrigger>();
     public List<EventTrigger> LaunchEventTriggers = new List<EventTrigger>();
     public List<EventTrigger> DetonateEventTriggers = new List<EventTrigger>();
 
-    private bool _canLaunch;
+    public bool CanDebug;
+
+    public bool CanLaunch;
     private float _launchOffset;
     public void Launch()
     {
-        _canLaunch = true;
+        CanLaunch = true;
         enabled = true;
         _launchOffset = traverse;
     }
 
-    private bool _canDetonate;
+    public bool CanDetonate;
     private float _detonateOffset;
     public void Detonate()
     {
-        _canDetonate = true;
+        CanDetonate = true;
         _detonateOffset = traverse;
     }
 
@@ -760,13 +763,13 @@ public class TimeTransform : MonoBehaviour {
 
 		Traverse();
 
-        if (_canLaunch || _canDetonate)
+        if (CanLaunch || CanDetonate || CanDebug)
         {
             float flooredTraverse = Mathf.Floor(traverse);
             float unitTraverse = Mathf.Repeat(traverse, 1f);
 
             //launch
-	        if (_canLaunch)
+	        if (CanLaunch)
             {
                 foreach (EventTrigger eventTrigger in LaunchEventTriggers)
                 {
@@ -775,13 +778,22 @@ public class TimeTransform : MonoBehaviour {
 	        }
 
             //detonate
-	        if (_canDetonate)
+	        if (CanDetonate)
             {
                 foreach (EventTrigger eventTrigger in DetonateEventTriggers)
                 {
                     eventTrigger.Process(flooredTraverse, unitTraverse, _detonateOffset);
-                } 
-	        }
+                }
+            }
+
+            //debug
+            if (CanDebug)
+            {
+                foreach (EventTrigger eventTrigger in DebugEventTriggers)
+                {
+                    eventTrigger.Process(flooredTraverse, unitTraverse, _detonateOffset);
+                }
+            }
 	    }
 
 	    //temp trs and traverse reset
