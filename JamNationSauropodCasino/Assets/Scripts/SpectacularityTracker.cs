@@ -167,6 +167,7 @@ namespace Assets.Scripts
             {
                 CrowdExcitment += 0.4f;
                 Audio.PlayOneShot(CheerSound);
+                Words.AnimateRainbowBoom();
                 Debug.Log("Grand Finale");
             }
 
@@ -185,6 +186,7 @@ namespace Assets.Scripts
             {
                 CrowdExcitment += 0.2f;
                 Audio.PlayOneShot(ApplaudSound);
+                Words.AnimateTimedBlast();
                 Debug.Log("Timed Blast");
                 foreach (Rocket r in found)
                     _usedInCombo.Add(r);
@@ -193,7 +195,6 @@ namespace Assets.Scripts
             //Unity Combo
             bool perfectMatch = true;
             int lastType = -1;
-            MainManager.RocketColor tempColor = _recentDetonations.ElementAt(0).Key.RocketColor;
             foreach (KeyValuePair<Rocket, float> entry in _recentDetonations)
             {
                 if (lastType == -1)
@@ -210,6 +211,7 @@ namespace Assets.Scripts
             {
                 CrowdExcitment += 0.2f;
                 Audio.PlayOneShot(ApplaudSound);
+                Words.AnimateUnityBoom();
                 Debug.Log("Unity");
             }
         }
