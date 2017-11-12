@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class MainManager : MonoBehaviour
 {
+    public enum RocketColor
+    {
+        Red,
+        Green,
+        Blue,
+        Yellow,
+        Cyan,
+        Magenta,
+        COUNT
+    }
+
     public struct KeyRocketBinding
     {
         public KeyCode Key;
@@ -20,6 +31,7 @@ public class MainManager : MonoBehaviour
     
     public RocketContainer RocketContainer;
     public int NumRockets;
+    public int StartRockets;
     public float RocketSpawnTime;
     public KeyCode[] PossibleKeyBinds;
 
@@ -44,6 +56,11 @@ public class MainManager : MonoBehaviour
         }
 
         KeyRocketBindings = keyRocketBindingsList.ToArray();
+
+        for(int i = 0; i < StartRockets; i++)
+        {
+            TrySpawnRocket(true);
+        }
     }
 
     private void Update()
@@ -84,11 +101,11 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    private void TrySpawnRocket()
+    private void TrySpawnRocket(bool fuckTimer = false)
     {
         _RocketSpawnTimer -= Time.deltaTime;
 
-        if (_RocketSpawnTimer <= 0)
+        if (_RocketSpawnTimer <= 0 || fuckTimer)
         {
             var rocket = RocketContainer.TrySpawnRocket();
 

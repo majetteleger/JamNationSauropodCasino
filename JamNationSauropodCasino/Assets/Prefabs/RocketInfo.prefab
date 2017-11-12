@@ -284,6 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Icon: {fileID: 114445408166434934}
+  KeyBackground: {fileID: 114840760250290994}
   Key: {fileID: 114296756907531180}
   LaunchSlider: {fileID: 114268263296827986}
 --- !u!114 &114840760250290994
