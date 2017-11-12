@@ -89,7 +89,7 @@ public class Rocket : MonoBehaviour
         LaunchTime = SelectedLaunchTime;
         _launchTimer = LaunchTime;
 
-        //Sound.fuse.Play();
+        Sound.fuse.Play();
 
         {//TODO: Move to Spawn()
 
@@ -113,8 +113,8 @@ public class Rocket : MonoBehaviour
     {
         _launched = true;
 
-        //Sound.fuse.Stop();
-        Sound.thruster.Play();
+        Sound.fuse.Stop();
+        //Sound.thruster.Play();
 
         Exploder.Launch();
     }
@@ -127,7 +127,7 @@ public class Rocket : MonoBehaviour
 
         MainManager.Instance.UnbindKey(this);
 
-        Sound.thruster.Stop();
+        //Sound.thruster.Stop();
 
         SpectacularityTracker.Instance.RegisterDetonation(this);
 
