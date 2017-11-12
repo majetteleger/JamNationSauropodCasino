@@ -24,11 +24,13 @@ namespace Assets.Scripts
             }
         }
 
-        public float ExcitmentLossPerSec = 0.01f;
+        public float ExcitmentLossPerFrame = 0.01f;
         public float ComboTimeBuffer = 3f;
         public float GrandFinaleBonus = 0.4f;
         public float TimedBlastBonus = 0.2f;
 
+        public float UpdateExcitementTime;
+        private float _updateExcitementTimer;
         public float UpdateCrowdHandsTime;
         private float _updateCrowdHandsTimer;
         public float UpdateCrowdFlipTime;
@@ -53,6 +55,7 @@ namespace Assets.Scripts
             UpdateCrowdHands(CrowdExcitment);
             UpdateCrowdFlip(CrowdExcitment);
 
+            _updateExcitementTimer = UpdateExcitementTime;
             _updateCrowdHandsTimer = UpdateCrowdHandsTime;
             _updateCrowdFlipTimer = UpdateCrowdFlipTime;
         }
@@ -97,8 +100,15 @@ namespace Assets.Scripts
         {
             _updateCrowdHandsTimer -= Time.deltaTime;
             _updateCrowdFlipTimer -= Time.deltaTime;
+            _updateExcitementTimer -= Time.deltaTime;
 
-            if(_updateCrowdHandsTimer <= 0)
+            if (_updateExcitementTimer <= 0)
+            {
+                _updateExcitementTimer = UpdateExcitementTime;
+                CrowdExcitment -= ExcitmentLossPerFrame;
+            }
+
+            if (_updateCrowdHandsTimer <= 0)
             {
                 _updateCrowdHandsTimer = UpdateCrowdHandsTime;
                 UpdateCrowdHands(CrowdExcitment);
@@ -109,12 +119,8 @@ namespace Assets.Scripts
                 _updateCrowdFlipTimer = UpdateCrowdFlipTime;
                 UpdateCrowdFlip(CrowdExcitment);
             }
+
             
-            if (Time.time - 1 > _lastLossTick)
-            {
-                _lastLossTick = Time.time;
-                CrowdExcitment -= ExcitmentLossPerSec;
-            }
 
             CheckCombos();
 

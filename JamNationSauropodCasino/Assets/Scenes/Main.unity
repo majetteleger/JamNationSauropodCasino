@@ -3994,13 +3994,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _crowdExcitment: 0.4
-  ExcitmentLossPerSec: 0.02
+  ExcitmentLossPerFrame: 0.002
   ComboTimeBuffer: 2
   GrandFinaleBonus: 0.4
   TimedBlastBonus: 0.2
+  UpdateExcitementTime: 0.1
   UpdateCrowdHandsTime: 1.7
   UpdateCrowdFlipTime: 1.3
-  CrowdExcitementBuffer: 0.1
+  CrowdExcitementBuffer: 0.05
 --- !u!1 &856637961
 GameObject:
   m_ObjectHideFlags: 0
