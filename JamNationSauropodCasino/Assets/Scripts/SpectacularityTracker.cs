@@ -10,6 +10,8 @@ namespace Assets.Scripts
         public static SpectacularityTracker Instance;
         private AudioSource Audio;
         public AudioClip CrowdSound;
+        public AudioClip ApplaudSound;
+        public AudioClip CheerSound;
 
         [SerializeField]
         private float _crowdExcitment = 0.2f;
@@ -38,6 +40,8 @@ namespace Assets.Scripts
         public float UpdateCrowdFlipTime;
         private float _updateCrowdFlipTimer;
         public float CrowdExcitementBuffer;
+
+        private float lastExcitmentThreshold = 0.25f;
 
         public Folk[] Crowd { get; set; }
 
@@ -139,9 +143,19 @@ namespace Assets.Scripts
             }
             _toRemove.Clear();
 
-            if(CrowdExcitment <= 0)
+            if (CrowdExcitment <= 0)
             {
                 MainManager.Instance.GameOver();
+            }
+
+            if (CrowdExcitment < lastExcitmentThreshold)
+            {
+                lastExcitmentThreshold -= 0.25f;
+            }
+            else if (CrowdExcitment > lastExcitmentThreshold + 0.25f)
+            {
+                lastExcitmentThreshold += 0.25f;
+                Audio.PlayOneShot(CrowdSound);
             }
         }
 
@@ -151,7 +165,7 @@ namespace Assets.Scripts
             if (_recentDetonations.Count >= 12)
             {
                 CrowdExcitment += 0.4f;
-                Audio.PlayOneShot(CrowdSound);
+                Audio.PlayOneShot(CheerSound);
                 Debug.Log("Grand Finale");
             }
 
@@ -169,7 +183,7 @@ namespace Assets.Scripts
             if (timedBlastCounter >= 3)
             {
                 CrowdExcitment += 0.2f;
-                Audio.PlayOneShot(CrowdSound);
+                Audio.PlayOneShot(ApplaudSound);
                 Debug.Log("Timed Blast");
                 foreach (Rocket r in found)
                     _usedInCombo.Add(r);
