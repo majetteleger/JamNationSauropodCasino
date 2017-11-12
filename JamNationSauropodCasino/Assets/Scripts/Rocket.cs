@@ -1,8 +1,5 @@
 ﻿using Assets.Scripts;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Rocket : MonoBehaviour
 {
@@ -10,7 +7,9 @@ public class Rocket : MonoBehaviour
     public float SelectedLaunchTime;
     
     public RocketInfo RocketInfo { get; set; }
+    public MainManager.RocketColor RocketColor { get; set; }
     public SoundController Sound;
+    public TimeTransform TimeTransform;
 
     private float _launchTimer;
     private bool _launched;
@@ -21,6 +20,30 @@ public class Rocket : MonoBehaviour
     {
         _launchTimer = LaunchTime;
         ShowInfo();
+
+        RocketColor = (MainManager.RocketColor)Random.Range(0, (int)MainManager.RocketColor.COUNT);
+
+        switch (RocketColor)
+        {
+            case MainManager.RocketColor.Red:
+                RocketInfo.KeyBackground.color = Color.red;
+                break;
+            case MainManager.RocketColor.Green:
+                RocketInfo.KeyBackground.color = Color.green;
+                break;
+            case MainManager.RocketColor.Blue:
+                RocketInfo.KeyBackground.color = Color.blue;
+                break;
+            case MainManager.RocketColor.Yellow:
+                RocketInfo.KeyBackground.color = Color.yellow;
+                break;
+            case MainManager.RocketColor.Cyan:
+                RocketInfo.KeyBackground.color = Color.cyan;
+                break;
+            case MainManager.RocketColor.Magenta:
+                RocketInfo.KeyBackground.color = Color.magenta;
+                break;
+        }
     }
 
     private void Update()
@@ -39,7 +62,7 @@ public class Rocket : MonoBehaviour
                 }
                 else
                 {
-                    Detonate();
+                    DetonateFail();
                 }
             }
         }
@@ -79,9 +102,7 @@ public class Rocket : MonoBehaviour
         Sound.fuse.Stop();
         Sound.thruster.Play();
 
-        // TEMP
-        transform.position += new Vector3(0, 5, 0);
-        //
+        TimeTransform.enabled = true;
     }
 
     private void Detonate()
@@ -97,7 +118,17 @@ public class Rocket : MonoBehaviour
         Sound.postDetonation.Play();
 
         SpectacularityTracker.Instance.RegisterDetonation(this);
-        
+
+        TimeTransform.TriggerEvent.Invoke();
+
+        Destroy(gameObject, 4f);//TODO: call from time transform
+    }
+    private void DetonateFail()
+    {
+        ResetAndHideInfo();
+
+        MainManager.Instance.UnbindKey(this);
+
         Destroy(gameObject, 1f);
     }
 }

@@ -8,22 +8,29 @@ public class RocketContainer : MonoBehaviour
     public GameObject RocketSpawnPointPrefab;
     public float Width;
 
-    public Transform[] RocketSpawnPoints { get; set; }
-    
-    private void Start()
+    private Transform[] _rocketSpawnPoints;
+    public Transform[] RocketSpawnPoints
     {
-        var rocketSpawnPointsList = new List<Transform>();
-        for (int i = 0; i < MainManager.Instance.NumRockets; i++)
+        get
         {
-            var rocketSpawnPoint = Instantiate(RocketSpawnPointPrefab, transform).transform;
-            rocketSpawnPoint.position = new Vector3((-Width/2) + ((Width / (MainManager.Instance.NumRockets-1)) * i), rocketSpawnPoint.position.y, rocketSpawnPoint.position.z);
+            if(_rocketSpawnPoints == null)
+            {
+                var rocketSpawnPointsList = new List<Transform>();
+                for (int i = 0; i < MainManager.Instance.NumRockets; i++)
+                {
+                    var rocketSpawnPoint = Instantiate(RocketSpawnPointPrefab, transform).transform;
+                    rocketSpawnPoint.localPosition = new Vector3((-Width / 2) + ((Width / (MainManager.Instance.NumRockets - 1)) * i), rocketSpawnPoint.localPosition.y, rocketSpawnPoint.localPosition.z);
 
-            rocketSpawnPointsList.Add(rocketSpawnPoint);
+                    rocketSpawnPointsList.Add(rocketSpawnPoint);
+                }
+
+                _rocketSpawnPoints = rocketSpawnPointsList.ToArray();
+            }
+
+            return _rocketSpawnPoints;
         }
-
-        RocketSpawnPoints = rocketSpawnPointsList.ToArray();
     }
-
+    
     public Rocket TrySpawnRocket()
     {
         var availableIndicesList = new List<int>();
