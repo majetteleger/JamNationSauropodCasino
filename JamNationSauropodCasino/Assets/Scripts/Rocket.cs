@@ -90,6 +90,8 @@ public class Rocket : MonoBehaviour
 
     private void Launch()
     {
+        if (_detonated) return;
+
         _launched = true;
 
         Sound.fuse.Stop();
@@ -100,6 +102,13 @@ public class Rocket : MonoBehaviour
 
     private void Detonate()
     {
+        if (!_launched)
+        {
+            _detonated = true;
+            DetonateFail();
+            return;
+        }
+
         _detonated = true;
 
         ResetAndHideInfo();
